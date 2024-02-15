@@ -23,7 +23,18 @@ app.post("/todo", function (req, res) {
 
 app.get("/todos", function (req, res) {});
 
-app.put("/completed", function (req, res) {});
+app.put("/completed", function (req, res) {
+    const updatePayload = req.body;
+    const parsePayload = updateTodo.safeParse(updatePayload);
+    if (!parsePayload.success) {
+      res.status(411).json({
+        msg: "you have sent the wrong inputs",
+      });
+      return;
+    }
+});
+
+
 app.listen(port, function () {
   console.log(`app listening on ${port}`);
 });
